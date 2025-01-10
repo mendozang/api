@@ -17,7 +17,7 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Expone el puerto 5000 para la aplicación
-EXPOSE 5120
+EXPOSE 5000
 
 # Configura el comando de inicio de la aplicación
 ENTRYPOINT ["dotnet", "api.dll"]

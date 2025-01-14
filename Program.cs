@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
                        $"Database={Environment.GetEnvironmentVariable("DB_NAME")};" +
                        $"Username={Environment.GetEnvironmentVariable("DB_USER")};" +
-                       $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}"
+                       $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}";
 
 // Configurar EF con PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>

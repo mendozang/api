@@ -39,12 +39,6 @@ builder.Services.AddScoped<PetPalzAPI.Services.CitaService>();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
-}
-
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseAuthorization();

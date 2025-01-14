@@ -1,6 +1,14 @@
 services:
-  - type: web
-    name: PetPalz API
-    env: dotnet
-    buildCommand: dotnet publish -c Release -o out
-    startCommand: dotnet out/api.dll
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=database
+    networks:
+      - app_network
+  database:
+    image: postgres
+    networks:
+      - app_network
+

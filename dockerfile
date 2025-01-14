@@ -18,6 +18,7 @@ COPY --from=build /app/out .
 
 # Expone el puerto 5000 para la aplicación
 EXPOSE 5000
+ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Configura el comando de inicio de la aplicación
 ENTRYPOINT ["dotnet", "api.dll"]

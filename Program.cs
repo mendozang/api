@@ -2,18 +2,30 @@ using Microsoft.EntityFrameworkCore;
 using PetPalzAPI.Data;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DotNetEnv;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+DotNetEnv.Env.Load();
+
 //env
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-                     ?? Environment.GetEnvironmentVariable("DefaultConnection");
+var connectionString = $"Host={Environment.GetEnvironmentVariable("HOST_DB")};" +
+                       $"Database={Environment.GetEnvironmentVariable("NAME_DB")};" +
+                       $"Username={Environment.GetEnvironmentVariable("USER_DB")};" +
+                       $"Password={Environment.GetEnvironmentVariable("PASSWORD_DB")};" +
+                       "SSL Mode=Require;Trust Server Certificate=true";
+
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("La cadena de conexión no se pudo construir. Verifica las variables de entorno.");
+}
+
 
 // Configurar EF con PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

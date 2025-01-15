@@ -8,10 +8,8 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 //env
-var connectionString = $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
-                       $"Database={Environment.GetEnvironmentVariable("DB_NAME")};" +
-                       $"Username={Environment.GetEnvironmentVariable("DB_USER")};" +
-                       $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}";
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                     ?? Environment.GetEnvironmentVariable("DefaultConnection");
 
 // Configurar EF con PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>

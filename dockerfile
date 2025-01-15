@@ -6,10 +6,8 @@ WORKDIR /app
 COPY . ./
 
 # Restaura las dependencias y publica la aplicación
-RUN dotnet clean
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
-RUN ef database update
 
 # Usa la imagen de .NET Runtime para ejecutar la aplicación
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime

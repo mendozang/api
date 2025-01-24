@@ -35,23 +35,26 @@ namespace PetPalzAPI.Services
             return usuario;
         }
 
-        public async Task<List<UsuarioDto>> GetAllUsuariosAsync()
-    {
-        return await _context.Usuarios
-            .Include(u => u.Mascotas)
-            .Select(u => new UsuarioDto
+        public async Task<List<UsuarioDto>> GetAllUsuariosAsync(int pageNumber, int pageSize)
+{
+    return await _context.Usuarios
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .Include(u => u.Mascotas)
+        .Select(u => new UsuarioDto
+        {
+            Id = u.Id,
+            Nombre = u.Nombre,
+            Email = u.Email,
+            Mascotas = u.Mascotas.Select(m => new MascotaDto
             {
-                Id = u.Id,
-                Nombre = u.Nombre,
-                Email = u.Email,
-                Mascotas = u.Mascotas.Select(m => new MascotaDto
-                {
-                    Id = m.Id,
-                    Nombre = m.Nombre,
-                    Especie = m.Especie,
-                }).ToList()
-            }).ToListAsync();
-    }
+                Id = m.Id,
+                Nombre = m.Nombre,
+                Especie = m.Especie,
+                UsuarioId = m.UsuarioId
+            }).ToList()
+        }).ToListAsync();
+}
 
         public async Task<UsuarioDto> GetUsuarioByIdAsync(int id)
     {

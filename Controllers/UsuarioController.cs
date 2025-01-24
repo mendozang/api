@@ -28,9 +28,9 @@ namespace PetPalzAPI.Controllers
         }
 
         [HttpGet]
-public async Task<IActionResult> GetAllUsuarios(int pageNumber = 1, int pageSize = 10)
+public async Task<IActionResult> GetAllUsuarios(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
 {
-    var usuarios = await _usuarioService.GetAllUsuariosAsync(pageNumber, pageSize);
+    var usuarios = await _usuarioService.GetAllUsuariosAsync(pageNumber, pageSize, searchTerm);
     return Ok(usuarios);
 }
 

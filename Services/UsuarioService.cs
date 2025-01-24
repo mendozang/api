@@ -35,9 +35,16 @@ namespace PetPalzAPI.Services
             return usuario;
         }
 
-        public async Task<List<UsuarioDto>> GetAllUsuariosAsync(int pageNumber, int pageSize)
+        public async Task<List<UsuarioDto>> GetAllUsuariosAsync(int pageNumber, int pageSize, string searchTerm = null)
 {
-    return await _context.Usuarios
+    var query = _context.Usuarios.AsQueryable();
+
+    if (!string.IsNullOrEmpty(searchTerm))
+    {
+        query = query.Where(u => u.Nombre.Contains(searchTerm) || u.Email.Contains(searchTerm));
+    }
+
+    return await query
         .Skip((pageNumber - 1) * pageSize)
         .Take(pageSize)
         .Include(u => u.Mascotas)

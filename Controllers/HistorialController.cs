@@ -26,22 +26,22 @@ namespace PetPalzAPI.Controllers
         }
 
         [HttpGet("{id}")]
-    public async Task<IActionResult> GetHistorialMedico(int id)
-    {
-        var historialDto = await _historialService.GetHistorialMedicoByIdAsync(id);
+        public async Task<IActionResult> GetHistorialMedico(int id)
+        {
+            var historialDto = await _historialService.GetHistorialMedicoByIdAsync(id);
 
-        if (historialDto == null)
-            return NotFound();
+            if (historialDto == null)
+                return NotFound();
 
-        return Ok(historialDto);
-    }
+            return Ok(historialDto);
+        }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAllHistorialesMedicos()
-    {
-        var historialesDto = await _historialService.GetAllHistorialesMedicosAsync();
-        return Ok(historialesDto);
-    }
+        [HttpGet]
+        public async Task<IActionResult> GetAllHistorialesMedicos(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
+        {
+            var historialesDto = await _historialService.GetAllHistorialesMedicosAsync(pageNumber, pageSize, searchTerm ?? string.Empty);
+            return Ok(historialesDto);
+        }
 
         [HttpPut("{id}")]
         public IActionResult ActualizarHistorial(int id, [FromBody] HistorialMedicoUpdateDTO historialDto)

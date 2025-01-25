@@ -12,7 +12,5 @@ namespace PetPalzAPI.Models
         public string? Direccion { get; set; }
 
         public string? InformacionContacto { get; set; } // Teléfono, email, etc.
-
-        public required ICollection<Cita> Citas { get; set; } = new List<Cita>();
     }
 }

@@ -37,9 +37,9 @@ namespace PetPalzAPI.Controllers
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllRecordatorios()
+    public async Task<IActionResult> GetAllRecordatorios(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
     {
-        var recordatoriosDto = await _recordatorioService.GetAllRecordatoriosAsync();
+        var recordatoriosDto = await _recordatorioService.GetAllRecordatoriosAsync(pageNumber, pageSize, searchTerm ?? string.Empty);
         return Ok(recordatoriosDto);
     }
 

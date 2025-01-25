@@ -13,7 +13,7 @@ namespace PetPalzAPI.Data
         public DbSet<HistorialMedico> HistorialesMedicos { get; set; }
         public DbSet<Recordatorio> Recordatorios { get; set; }
         public DbSet<Veterinario> Veterinarios { get; set; }
-        public DbSet<Cita> Citas { get; set; }
+        public DbSet<PrimerosAuxilios> PrimerosAuxilios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,7 @@ namespace PetPalzAPI.Data
                         ));
                     }
                 }
+
                 // Relación Usuario-Mascotas
                 modelBuilder.Entity<Usuario>()
                     .HasMany(u => u.Mascotas)
@@ -58,30 +59,16 @@ namespace PetPalzAPI.Data
                     .HasForeignKey(r => r.MascotaId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                // Relación Citas-Veterinario
-                modelBuilder.Entity<Veterinario>()
-                    .HasMany(v => v.Citas)
-                    .WithOne(c => c.Veterinario)
-                    .HasForeignKey(c => c.VeterinarioId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                // Configuración de Veterinario: Sin relaciones
+                modelBuilder.Entity<Veterinario>();
 
-                // Relación Cita-Mascota
-                modelBuilder.Entity<Cita>()
-                    .HasOne(c => c.Mascota)
-                    .WithMany(m => m.Citas)
-                    .HasForeignKey(c => c.MascotaId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
-                // Relación Cita-Veterinario
-                modelBuilder.Entity<Cita>()
-                    .HasOne(c => c.Veterinario)
-                    .WithMany(v => v.Citas)
-                    .HasForeignKey(c => c.VeterinarioId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                // Configuración de PrimerosAuxilios: Tabla independiente
+                modelBuilder.Entity<PrimerosAuxilios>();
 
                 base.OnModelCreating(modelBuilder);
             }
         }
     }
 }
+
 

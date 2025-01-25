@@ -45,7 +45,7 @@ builder.Services.AddScoped<PetPalzAPI.Services.MascotaService>();
 builder.Services.AddScoped<PetPalzAPI.Services.HistorialMedicoService>();
 builder.Services.AddScoped<PetPalzAPI.Services.RecordatorioService>();
 builder.Services.AddScoped<PetPalzAPI.Services.VeterinarioService>();
-builder.Services.AddScoped<PetPalzAPI.Services.CitaService>();
+builder.Services.AddScoped<PetPalzAPI.Services.PrimerosAuxiliosService>();
 
 var app = builder.Build();
 

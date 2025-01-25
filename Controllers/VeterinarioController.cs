@@ -37,9 +37,9 @@ namespace PetPalzAPI.Controllers
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllVeterinarios()
+    public async Task<IActionResult> GetAllVeterinarios(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
     {
-        var veterinarios = await _veterinarioService.GetAllVeterinariosAsync();
+        var veterinarios = await _veterinarioService.GetAllVeterinariosAsync(pageNumber, pageSize, searchTerm ?? string.Empty);
         return Ok(veterinarios);
     }
 

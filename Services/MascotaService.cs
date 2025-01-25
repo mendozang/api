@@ -32,17 +32,29 @@ namespace PetPalzAPI.Services
             return mascota;
         }
 
-        public async Task<List<MascotaDto>> GetAllMascotasAsync()
-    {
-        return await _context.Mascotas
-            .Select(m => new MascotaDto
+        public async Task<List<MascotaDto>> GetAllMascotasAsync(int pageNumber, int pageSize, string? searchTerm = null)
+        {
+            var query = _context.Mascotas.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                Id = m.Id,
-                Nombre = m.Nombre,
-                Especie = m.Especie,
-                UsuarioId = m.UsuarioId
-            }).ToListAsync();
-    }
+                query = query.Where(m => (m.Nombre != null && m.Nombre.Contains(searchTerm)) || 
+                                           (m.Especie != null && m.Especie.Contains(searchTerm)) || 
+                                           (m.Raza != null && m.Raza.Contains(searchTerm)));
+            }
+
+            return await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(m => new MascotaDto
+                {
+                    Id = m.Id,
+                    Nombre = m.Nombre,
+                    Especie = m.Especie,
+                    UsuarioId = m.UsuarioId
+                })
+                .ToListAsync();
+        }
 
         public async Task<MascotaDto> GetMascotaByIdAsync(int id)
     {

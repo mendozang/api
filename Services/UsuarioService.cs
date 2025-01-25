@@ -35,54 +35,55 @@ namespace PetPalzAPI.Services
             return usuario;
         }
 
-        public async Task<List<UsuarioDto>> GetAllUsuariosAsync(int pageNumber, int pageSize, string searchTerm = null)
-{
-    var query = _context.Usuarios.AsQueryable();
-
-    if (!string.IsNullOrEmpty(searchTerm))
-    {
-        query = query.Where(u => u.Nombre.Contains(searchTerm) || u.Email.Contains(searchTerm));
-    }
-
-    return await query
-        .Skip((pageNumber - 1) * pageSize)
-        .Take(pageSize)
-        .Include(u => u.Mascotas)
-        .Select(u => new UsuarioDto
+        public async Task<List<UsuarioDto>> GetAllUsuariosAsync(int pageNumber, int pageSize, string? searchTerm = null)
         {
-            Id = u.Id,
-            Nombre = u.Nombre,
-            Email = u.Email,
-            Mascotas = u.Mascotas.Select(m => new MascotaDto
+            var query = _context.Usuarios.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                Id = m.Id,
-                Nombre = m.Nombre,
-                Especie = m.Especie,
-                UsuarioId = m.UsuarioId
-            }).ToList()
-        }).ToListAsync();
-}
+                query = query.Where(u => u.Nombre.Contains(searchTerm) || u.Email.Contains(searchTerm));
+            }
+
+            return await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Include(u => u.Mascotas)
+                .Select(u => new UsuarioDto
+                {
+                    Id = u.Id,
+                    Nombre = u.Nombre,
+                    Email = u.Email,
+                    Mascotas = u.Mascotas.Select(m => new MascotaDto
+                    {
+                        Id = m.Id,
+                        Nombre = m.Nombre,
+                        Especie = m.Especie,
+                        UsuarioId = m.UsuarioId
+                    }).ToList()
+                }).ToListAsync();
+        }
 
         public async Task<UsuarioDto> GetUsuarioByIdAsync(int id)
-    {
-        var usuario = await _context.Usuarios
-            .Include(u => u.Mascotas) // Incluir las mascotas
-            .FirstOrDefaultAsync(u => u.Id == id);
-
-        if (usuario == null) return null;
-
-        return new UsuarioDto
         {
-            Id = usuario.Id,
-            Nombre = usuario.Nombre,
-            Email = usuario.Email,
-            Mascotas = usuario.Mascotas.Select(m => new MascotaDto
+            var usuario = await _context.Usuarios
+                .Include(u => u.Mascotas) // Incluir las mascotas
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (usuario == null) return null;
+
+            return new UsuarioDto
             {
-                Id = m.Id,
-                Nombre = m.Nombre,
-                Especie = m.Especie
-            }).ToList()
-        };}
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                Email = usuario.Email,
+                Mascotas = usuario.Mascotas.Select(m => new MascotaDto
+                {
+                    Id = m.Id,
+                    Nombre = m.Nombre,
+                    Especie = m.Especie
+                }).ToList()
+            };
+        }
 
         public bool ActualizarUsuario(int id, UsuarioUpdateDTO usuarioDto)
         {

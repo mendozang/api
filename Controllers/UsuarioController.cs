@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using PetPalzAPI.Data;
-using PetPalzAPI.Models;
 using PetPalzAPI.DTOs;
 using PetPalzAPI.Services;
 
@@ -28,22 +26,22 @@ namespace PetPalzAPI.Controllers
         }
 
         [HttpGet]
-public async Task<IActionResult> GetAllUsuarios(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
-{
-    var usuarios = await _usuarioService.GetAllUsuariosAsync(pageNumber, pageSize, searchTerm);
-    return Ok(usuarios);
-}
+        public async Task<IActionResult> GetAllUsuarios(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
+        {
+            var usuarios = await _usuarioService.GetAllUsuariosAsync(pageNumber, pageSize, searchTerm ?? string.Empty);
+            return Ok(usuarios);
+        }
 
         [HttpGet("{id}")]
-    public async Task<IActionResult> GetUsuario(int id)
-    {
-        var usuarioDto = await _usuarioService.GetUsuarioByIdAsync(id);
+        public async Task<IActionResult> GetUsuario(int id)
+        {
+            var usuarioDto = await _usuarioService.GetUsuarioByIdAsync(id);
 
-        if (usuarioDto == null)
-            return NotFound();
+            if (usuarioDto == null)
+                return NotFound();
 
-        return Ok(usuarioDto);
-    }
+            return Ok(usuarioDto);
+        }
 
         [HttpPut("{id}")]
         public IActionResult ActualizarUsuario(int id, [FromBody] UsuarioUpdateDTO usuarioDto)

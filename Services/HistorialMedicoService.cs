@@ -31,21 +31,33 @@ namespace PetPalzAPI.Services
             return historial;
         }
 
-        public async Task<List<HistorialMedicoDto>> GetAllHistorialesMedicosAsync()
-    {
-        return await _context.HistorialesMedicos
-            .Include(h => h.Mascota)
-            .Select(h => new HistorialMedicoDto
-            {
-                Id = h.Id,
-            Vacunas = h.Vacunas,
-            Enfermedades = h.Enfermedades,
-            Tratamientos = h.Tratamientos,
-            MascotaId = h.MascotaId
-            }).ToListAsync();
-    }
+        public async Task<List<HistorialMedicoDto>> GetAllHistorialesMedicosAsync(int pageNumber, int pageSize, string? searchTerm = null)
+        {
+            var query = _context.HistorialesMedicos.AsQueryable();
 
-         public async Task<HistorialMedicoDto> GetHistorialMedicoByIdAsync(int id)
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(h => (h.Vacunas != null && h.Vacunas.Contains(searchTerm)) || 
+                                           (h.Enfermedades != null && h.Enfermedades.Contains(searchTerm)) || 
+                                           (h.Tratamientos != null && h.Tratamientos.Contains(searchTerm)));
+            }
+
+            return await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Include(h => h.Mascota)
+                .Select(h => new HistorialMedicoDto
+                {
+                    Id = h.Id,
+                    Vacunas = h.Vacunas,
+                    Enfermedades = h.Enfermedades,
+                    Tratamientos = h.Tratamientos,
+                    MascotaId = h.MascotaId
+                })
+                .ToListAsync();
+        }
+
+        public async Task<HistorialMedicoDto?> GetHistorialMedicoByIdAsync(int id)
     {
         var historialMedico = await _context.HistorialesMedicos
             .Include(h => h.Mascota)

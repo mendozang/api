@@ -26,9 +26,9 @@ namespace PetPalzAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllMascotas()
+        public async Task<IActionResult> GetAllMascotas(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
         {
-            var mascotasDto = await _mascotaService.GetAllMascotasAsync();
+            var mascotasDto = await _mascotaService.GetAllMascotasAsync(pageNumber, pageSize, searchTerm ?? string.Empty);
             return Ok(mascotasDto);
         }
 

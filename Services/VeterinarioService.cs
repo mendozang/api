@@ -21,7 +21,6 @@ namespace PetPalzAPI.Services
                 Nombre = dto.Nombre,
                 Direccion = dto.Direccion,
                 InformacionContacto = dto.InformacionContacto,
-                Citas = new List<Cita>() // Initialize Citas as an empty list
             };
 
             _context.Veterinarios.Add(veterinario);
@@ -35,7 +34,10 @@ namespace PetPalzAPI.Services
             var veterinario = await _context.Veterinarios
                 .FirstOrDefaultAsync(v => v.Id == id);
 
-            if (veterinario == null) return null;
+            if (veterinario == null)
+            {
+                throw new KeyNotFoundException($"Veterinario with Id {id} not found.");
+            }
 
             return new VeterinarioDto
             {
@@ -46,9 +48,20 @@ namespace PetPalzAPI.Services
             };
         }
 
-        public async Task<List<VeterinarioDto>> GetAllVeterinariosAsync()
+        public async Task<List<VeterinarioDto>> GetAllVeterinariosAsync(int pageNumber, int pageSize, string? searchTerm = null)
         {
-            return await _context.Veterinarios
+            var query = _context.Veterinarios.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(v => (v.Nombre != null && v.Nombre.Contains(searchTerm)) ||
+                                         (v.Direccion != null && v.Direccion.Contains(searchTerm)) ||
+                                         (v.InformacionContacto != null && v.InformacionContacto.Contains(searchTerm)));
+            }
+
+            return await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .Select(v => new VeterinarioDto
                 {
                     Id = v.Id,

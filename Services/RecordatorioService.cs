@@ -49,9 +49,18 @@ namespace PetPalzAPI.Services
             };
         }
 
-        public async Task<List<RecordatorioDto>> GetAllRecordatoriosAsync()
+        public async Task<List<RecordatorioDto>> GetAllRecordatoriosAsync(int pageNumber, int pageSize, string? searchTerm = null)
         {
-            return await _context.Recordatorios
+            var query = _context.Recordatorios.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(r => (r.Tipo != null && r.Tipo.Contains(searchTerm)) || (r.Notificacion != null && r.Notificacion.Contains(searchTerm)));
+            }
+
+            return await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .Include(r => r.Mascota)
                 .Select(r => new RecordatorioDto
                 {
@@ -60,9 +69,11 @@ namespace PetPalzAPI.Services
                     Fecha = r.Fecha,
                     Notificacion = r.Notificacion,
                     Recurrente = r.Recurrente,
-                    MascotaId = r.MascotaId,
-                }).ToListAsync();
+                    MascotaId = r.MascotaId
+                })
+                .ToListAsync();
         }
+
 
         public bool ActualizarRecordatorio(int id, RecordatorioUpdateDTO recordatorioDto)
         {

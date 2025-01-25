@@ -13,6 +13,5 @@ namespace PetPalzAPI.Models
         public ICollection<HistorialMedico> HistorialesMedicos { get; set; } = new List<HistorialMedico>();
 
         public ICollection<Recordatorio>? Recordatorios { get; set; }
-        public ICollection<Cita> Citas { get; set; } = new List<Cita>();
     }
 }

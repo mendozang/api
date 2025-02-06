@@ -22,6 +22,14 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("La cadena de conexión no se pudo construir. Verifica las variables de entorno.");
 }
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5021); // HTTP port
+    options.ListenAnyIP(5001, listenOptions =>
+    {
+        listenOptions.UseHttps(); // HTTPS port
+    });
+});
 
 // Configurar EF con PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>

@@ -60,6 +60,9 @@ builder.Services.AddScoped<PetPalzAPI.Services.PrimerosAuxiliosService>();
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -71,8 +74,7 @@ app.UseRouting();
 
 app.UseCors("AllowAllOrigins");
 
-app.UseSwagger();
-app.UseSwaggerUI();
+
 app.UseAuthorization();
 
 app.MapControllers();

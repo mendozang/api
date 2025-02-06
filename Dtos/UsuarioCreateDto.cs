@@ -5,7 +5,7 @@ namespace PetPalzAPI.DTOs
     public class UsuarioCreateDTO
     {
         [Required]
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(120, MinimumLength = 3)]
         public required string Nombre { get; set; }
 
         [Required]

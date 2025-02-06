@@ -35,6 +35,17 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
@@ -48,6 +59,17 @@ builder.Services.AddScoped<PetPalzAPI.Services.VeterinarioService>();
 builder.Services.AddScoped<PetPalzAPI.Services.PrimerosAuxiliosService>();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("AllowAllOrigins");
 
 app.UseSwagger();
 app.UseSwaggerUI();

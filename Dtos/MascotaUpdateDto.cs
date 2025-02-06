@@ -14,6 +14,8 @@ namespace PetPalzAPI.DTOs
 
         public DateTime FechaNacimiento { get; set; }
 
+        public string? ImagenUrl { get; set; }
+
         public DateTime FechaUtc => DateTime.SpecifyKind(FechaNacimiento, DateTimeKind.Utc);
     }
 }

@@ -53,6 +53,7 @@ namespace PetPalzAPI.Services
                     Id = u.Id,
                     Nombre = u.Nombre,
                     Email = u.Email,
+                    Contraseña = u.Contraseña,
                     Mascotas = u.Mascotas.Select(m => new MascotaDto
                     {
                         Id = m.Id,
@@ -76,6 +77,7 @@ namespace PetPalzAPI.Services
                 Id = usuario.Id,
                 Nombre = usuario.Nombre,
                 Email = usuario.Email,
+                Contraseña = usuario.Contraseña,
                 Mascotas = usuario.Mascotas.Select(m => new MascotaDto
                 {
                     Id = m.Id,

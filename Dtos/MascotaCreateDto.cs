@@ -18,6 +18,8 @@ namespace PetPalzAPI.DTOs
         [Required]
         public DateTime FechaNacimiento { get; set; }
 
+        public string? ImagenUrl { get; set; }
+
         [Required]
         public int UsuarioId { get; set; } // Relación con el usuario
 

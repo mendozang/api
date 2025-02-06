@@ -10,6 +10,8 @@ namespace PetPalzAPI.Data
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Mascota> Mascotas { get; set; }
+
+        public DbSet<Monitoreo> Monitoreos { get; set; }
         public DbSet<HistorialMedico> HistorialesMedicos { get; set; }
         public DbSet<Recordatorio> Recordatorios { get; set; }
         public DbSet<Veterinario> Veterinarios { get; set; }
@@ -57,6 +59,13 @@ namespace PetPalzAPI.Data
                     .HasMany(m => m.Recordatorios)
                     .WithOne(r => r.Mascota)
                     .HasForeignKey(r => r.MascotaId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                // Relación Mascota-Monitoreo
+                modelBuilder.Entity<Mascota>()
+                    .HasMany(m => m.Monitoreos)
+                    .WithOne(mo => mo.Mascota)
+                    .HasForeignKey(mo => mo.MascotaId)
                     .OnDelete(DeleteBehavior.Cascade);
 
                 // Configuración de Veterinario: Sin relaciones

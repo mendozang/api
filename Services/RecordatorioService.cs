@@ -19,9 +19,13 @@ namespace PetPalzAPI.Services
             var recordatorio = new Recordatorio
             {
                 Tipo = recordatorioDto.Tipo,
-                Fecha = recordatorioDto.Fecha,
-                Notificacion = recordatorioDto.Notificacion,
-                Recurrente = recordatorioDto.Recurrente,
+                Nombre = recordatorioDto.Nombre,
+                Descripcion = recordatorioDto.Descripcion,
+                Hora = recordatorioDto.Hora,
+                Frecuencia = recordatorioDto.Frecuencia,
+                FechaInicio = recordatorioDto.FechaInicio,
+                FechaFin = recordatorioDto.FechaFin,
+                FechaUnica = recordatorioDto.FechaUnica,
                 MascotaId = recordatorioDto.MascotaId
             };
 
@@ -42,9 +46,13 @@ namespace PetPalzAPI.Services
             return new RecordatorioDto
             {
                 Tipo = recordatorio.Tipo,
-                Fecha = recordatorio.Fecha,
-                Notificacion = recordatorio.Notificacion,
-                Recurrente = recordatorio.Recurrente,
+                Nombre = recordatorio.Nombre,
+                Descripcion = recordatorio.Descripcion,
+                Hora = recordatorio.Hora,
+                Frecuencia = recordatorio.Frecuencia,
+                FechaInicio = recordatorio.FechaInicio,
+                FechaFin = recordatorio.FechaFin,
+                FechaUnica = recordatorio.FechaUnica,
                 MascotaId = recordatorio.MascotaId
             };
         }
@@ -55,10 +63,11 @@ namespace PetPalzAPI.Services
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                query = query.Where(r => (r.Tipo != null && r.Tipo.Contains(searchTerm)) || (r.Notificacion != null && r.Notificacion.Contains(searchTerm)));
+                query = query.Where(r => (r.Tipo != null && r.Tipo.Contains(searchTerm)) || (r.Nombre != null && r.Nombre.Contains(searchTerm)));
             }
 
             return await query
+                .OrderBy(r => r.Id)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Include(r => r.Mascota)
@@ -66,9 +75,13 @@ namespace PetPalzAPI.Services
                 {
                     Id = r.Id,
                     Tipo = r.Tipo,
-                    Fecha = r.Fecha,
-                    Notificacion = r.Notificacion,
-                    Recurrente = r.Recurrente,
+                    Nombre = r.Nombre,
+                    Descripcion = r.Descripcion,
+                    Hora = r.Hora,
+                    Frecuencia = r.Frecuencia,
+                    FechaInicio = r.FechaInicio,
+                    FechaFin = r.FechaFin,
+                    FechaUnica = r.FechaUnica,
                     MascotaId = r.MascotaId
                 })
                 .ToListAsync();
@@ -83,14 +96,26 @@ namespace PetPalzAPI.Services
             if (!string.IsNullOrEmpty(recordatorioDto.Tipo))
                 recordatorio.Tipo = recordatorioDto.Tipo;
 
-            if (recordatorioDto.Fecha != default(DateTime))
-                recordatorio.Fecha = recordatorioDto.Fecha;
+            if (!string.IsNullOrEmpty(recordatorioDto.Nombre))
+                recordatorio.Nombre = recordatorioDto.Nombre;
 
-            if (!string.IsNullOrEmpty(recordatorioDto.Notificacion))
-                recordatorio.Notificacion = recordatorioDto.Notificacion;
+            if (!string.IsNullOrEmpty(recordatorioDto.Descripcion))
+                recordatorio.Descripcion = recordatorioDto.Descripcion;
+            
+            if (recordatorioDto.Hora != null)
+                recordatorio.Hora = recordatorioDto.Hora;
 
-            if (recordatorioDto.Recurrente.HasValue)
-                recordatorio.Recurrente = recordatorioDto.Recurrente.Value;
+            if (!string.IsNullOrEmpty(recordatorioDto.Frecuencia))
+                recordatorio.Frecuencia = recordatorioDto.Frecuencia;
+
+            if (recordatorioDto.FechaInicio != null)
+                recordatorio.FechaInicio = recordatorioDto.FechaInicio;
+
+            if (recordatorioDto.FechaFin != null)
+                recordatorio.FechaFin = recordatorioDto.FechaFin;
+
+            if (recordatorioDto.FechaUnica != null)
+                recordatorio.FechaUnica = recordatorioDto.FechaUnica;
 
             _context.SaveChanges();
             return true;

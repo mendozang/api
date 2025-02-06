@@ -7,6 +7,8 @@ namespace PetPalzAPI.Models
         public required string Email { get; set; }
         public required string Contraseña { get; set; }
 
+        public string? ImagenUrl { get; set; }
+
         public List<Mascota>? Mascotas { get; set; }
     }
 }

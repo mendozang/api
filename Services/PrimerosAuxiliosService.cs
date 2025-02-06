@@ -45,6 +45,7 @@ namespace PetPalzAPI.Services
             }
 
             return await query
+                .OrderBy(p => p.Id)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Select(p => new PrimerosAuxiliosDto

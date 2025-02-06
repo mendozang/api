@@ -60,6 +60,7 @@ namespace PetPalzAPI.Services
             }
 
             return await query
+                .OrderBy(v => v.Id)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Select(v => new VeterinarioDto

@@ -15,5 +15,7 @@ namespace PetPalzAPI.DTOs
         [Required]
         [MinLength(6)]
         public required string Contraseña { get; set; }
+
+        public string? ImagenUrl { get; set; }
     }
 }

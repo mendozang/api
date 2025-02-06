@@ -5,24 +5,23 @@ namespace PetPalzAPI.DTOs
     public class MascotaCreateDTO
     {
         [Required]
-        [StringLength(50, MinimumLength = 2)]
+        [StringLength(20, MinimumLength = 2)]
         public required string Nombre { get; set; }
 
         [Required]
-        [StringLength(30)]
-        public required string Especie { get; set; }
+        public required DateTime FechaNacimiento { get; set; }
 
         [Required]
+        public required string Especie { get; set; }
+
         public string? Raza { get; set; }
 
         [Required]
-        public DateTime FechaNacimiento { get; set; }
-
+        public required double Peso { get; set; }
         public string? ImagenUrl { get; set; }
+
 
         [Required]
         public int UsuarioId { get; set; } // Relación con el usuario
-
-        public DateTime FechaUtc => DateTime.SpecifyKind(FechaNacimiento, DateTimeKind.Utc);
     }
 }

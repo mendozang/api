@@ -63,6 +63,7 @@ builder.Services.AddScoped<PetPalzAPI.Services.UsuarioService>();
 builder.Services.AddScoped<PetPalzAPI.Services.MascotaService>();
 builder.Services.AddScoped<PetPalzAPI.Services.HistorialMedicoService>();
 builder.Services.AddScoped<PetPalzAPI.Services.RecordatorioService>();
+builder.Services.AddScoped<PetPalzAPI.Services.MonitoreoService>();
 builder.Services.AddScoped<PetPalzAPI.Services.VeterinarioService>();
 builder.Services.AddScoped<PetPalzAPI.Services.PrimerosAuxiliosService>();
 

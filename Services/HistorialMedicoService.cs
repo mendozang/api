@@ -43,6 +43,7 @@ namespace PetPalzAPI.Services
             }
 
             return await query
+                .OrderBy(h => h.Id)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Include(h => h.Mascota)

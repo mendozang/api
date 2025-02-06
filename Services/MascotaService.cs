@@ -22,6 +22,8 @@ namespace PetPalzAPI.Services
                 Especie = mascotaDto.Especie,
                 Raza = mascotaDto.Raza,
                 FechaNacimiento = mascotaDto.FechaNacimiento,
+                Peso = mascotaDto.Peso,
+                ImagenUrl = mascotaDto.ImagenUrl,
                 UsuarioId = mascotaDto.UsuarioId,
                 Usuario = _context.Usuarios?.FirstOrDefault(u => u.Id == mascotaDto.UsuarioId) ?? throw new InvalidOperationException("Usuario not found")
             };
@@ -44,6 +46,7 @@ namespace PetPalzAPI.Services
             }
 
             return await query
+                .OrderBy(m => m.Id)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Select(m => new MascotaDto
@@ -51,6 +54,10 @@ namespace PetPalzAPI.Services
                     Id = m.Id,
                     Nombre = m.Nombre,
                     Especie = m.Especie,
+                    Raza = m.Raza,
+                    FechaNacimiento = m.FechaNacimiento,
+                    Peso = m.Peso,
+                    ImagenUrl = m.ImagenUrl,
                     UsuarioId = m.UsuarioId
                 })
                 .ToListAsync();
@@ -68,6 +75,10 @@ namespace PetPalzAPI.Services
             Id = mascota.Id,
             Nombre = mascota.Nombre,
             Especie = mascota.Especie,
+            Raza = mascota.Raza,
+            FechaNacimiento = mascota.FechaNacimiento,
+            Peso = mascota.Peso,
+            ImagenUrl = mascota.ImagenUrl,
             UsuarioId = mascota.UsuarioId
         };
     }
@@ -88,6 +99,12 @@ namespace PetPalzAPI.Services
 
             if (mascotaDto.FechaNacimiento != default(DateTime))
                 mascota.FechaNacimiento = mascotaDto.FechaNacimiento;
+
+            if (mascotaDto.Peso != default(double))
+                mascota.Peso = mascotaDto.Peso;
+
+            if (!string.IsNullOrEmpty(mascotaDto.ImagenUrl))
+                mascota.ImagenUrl = mascotaDto.ImagenUrl;
 
             _context.SaveChanges();
             return true;

@@ -7,15 +7,21 @@ namespace PetPalzAPI.Models
         public int Id { get; set; }
 
         [Required]
-        public required string Tipo { get; set; } // Ejemplo: "Vacuna", "Desparasitación"
+        public required string Tipo { get; set; } 
 
-        [Required]
-        public DateTime Fecha { get; set; }
+        public string? Nombre { get; set; }
 
-        public string? Notificacion { get; set; } // Texto del recordatorio
+        public string? Descripcion { get; set; }
 
-        [Required]
-        public bool Recurrente { get; set; } // Indica si es recurrente
+        public TimeSpan? Hora { get; set; }
+
+        public string? Frecuencia { get; set; }
+
+        public DateTime? FechaInicio { get; set; } 
+
+        public DateTime? FechaFin { get; set; }
+
+        public DateTime? FechaUnica { get; set; }
 
         [Required]
         public int MascotaId { get; set; }

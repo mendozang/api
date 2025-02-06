@@ -20,7 +20,8 @@ namespace PetPalzAPI.Services
             {
                 Nombre = usuarioDto.Nombre,
                 Email = usuarioDto.Email,
-                Contraseña = usuarioDto.Contraseña // Aquí puedes cifrar la contraseña
+                Contraseña = usuarioDto.Contraseña,
+                ImagenUrl = usuarioDto.ImagenUrl
             };
 
             if (_context != null)
@@ -45,6 +46,7 @@ namespace PetPalzAPI.Services
             }
 
             return await query
+                .OrderBy(u => u.Id)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Include(u => u.Mascotas)
@@ -54,11 +56,16 @@ namespace PetPalzAPI.Services
                     Nombre = u.Nombre,
                     Email = u.Email,
                     Contraseña = u.Contraseña,
+                    ImagenUrl = u.ImagenUrl,
                     Mascotas = u.Mascotas.Select(m => new MascotaDto
                     {
                         Id = m.Id,
                         Nombre = m.Nombre,
                         Especie = m.Especie,
+                        FechaNacimiento = m.FechaNacimiento,
+                        Peso = m.Peso,
+                        Raza = m.Raza,
+                        ImagenUrl = m.ImagenUrl,
                         UsuarioId = m.UsuarioId
                     }).ToList()
                 }).ToListAsync();
@@ -78,11 +85,16 @@ namespace PetPalzAPI.Services
                 Nombre = usuario.Nombre,
                 Email = usuario.Email,
                 Contraseña = usuario.Contraseña,
+                ImagenUrl = usuario.ImagenUrl,
                 Mascotas = usuario.Mascotas.Select(m => new MascotaDto
                 {
                     Id = m.Id,
                     Nombre = m.Nombre,
-                    Especie = m.Especie
+                    Especie = m.Especie,
+                    FechaNacimiento = m.FechaNacimiento,
+                    Peso = m.Peso,
+                    Raza = m.Raza,
+                    ImagenUrl = m.ImagenUrl
                 }).ToList()
             };
         }
@@ -99,7 +111,10 @@ namespace PetPalzAPI.Services
                 usuario.Email = usuarioDto.Email;
 
             if (!string.IsNullOrEmpty(usuarioDto.NuevaContraseña))
-                usuario.Contraseña = usuarioDto.NuevaContraseña; // Aquí también puedes cifrar
+                usuario.Contraseña = usuarioDto.NuevaContraseña;
+
+            if (!string.IsNullOrEmpty(usuarioDto.ImagenUrl))
+                usuario.ImagenUrl = usuarioDto.ImagenUrl;
 
             _context.SaveChanges();
             return true;

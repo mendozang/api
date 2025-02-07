@@ -11,6 +11,6 @@ namespace PetPalzAPI.Models
 
         public string? Direccion { get; set; }
 
-        public string? InformacionContacto { get; set; } // Teléfono, email, etc.
+        public string? InformacionContacto { get; set; }
     }
 }

@@ -20,6 +20,8 @@ namespace PetPalzAPI.Services
             {
                 Titulo = primerosAuxiliosDto.Titulo,
                 Categoria = primerosAuxiliosDto.Categoria,
+                Resumen = primerosAuxiliosDto.Resumen,
+                ImagenUrl = primerosAuxiliosDto.ImagenUrl,
                 Contenido = primerosAuxiliosDto.Contenido
             };
 
@@ -41,7 +43,7 @@ namespace PetPalzAPI.Services
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                query = query.Where(p => p.Titulo.Contains(searchTerm) || p.Categoria.Contains(searchTerm));
+                query = query.Where(p => p.Titulo.Contains(searchTerm) || p.Resumen.Contains(searchTerm));
             }
 
             return await query
@@ -53,6 +55,8 @@ namespace PetPalzAPI.Services
                     Id = p.Id,
                     Titulo = p.Titulo,
                     Categoria = p.Categoria,
+                    Resumen = p.Resumen,
+                    ImagenUrl = p.ImagenUrl,
                     Contenido = p.Contenido
                 })
                 .ToListAsync();
@@ -67,6 +71,8 @@ namespace PetPalzAPI.Services
                     Id = p.Id,
                     Titulo = p.Titulo,
                     Categoria = p.Categoria,
+                    Resumen = p.Resumen,
+                    ImagenUrl = p.ImagenUrl,
                     Contenido = p.Contenido
                 }).FirstOrDefaultAsync();
 

@@ -16,8 +16,8 @@ WORKDIR /app
 # Copia los archivos publicados al contenedor runtime
 COPY --from=build /app/out .
 
-# Expone el puerto 5000 para la aplicación
-EXPOSE 5000
+# Expone el puerto 5001 para la aplicación
+EXPOSE 5001
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Configura el comando de inicio de la aplicación

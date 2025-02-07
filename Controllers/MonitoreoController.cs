@@ -37,7 +37,7 @@ namespace PetPalzAPI.Controllers
             return Ok(monitoreoDto);
         }
 
-        [HttpGet("{mascotaId}")]
+        [HttpGet("mascota/{mascotaId}")]
         public async Task<IActionResult> GetMonitoreoByMascotaId(int mascotaId)
         {
             var monitoreoDto = await _monitoreoService.GetAllMonitoreosByMascotaIdAsync(mascotaId);

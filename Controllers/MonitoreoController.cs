@@ -38,9 +38,9 @@ namespace PetPalzAPI.Controllers
         }
 
         [HttpGet("mascota/{mascotaId}")]
-        public async Task<IActionResult> GetMonitoreoByMascotaId(int mascotaId)
+        public async Task<IActionResult> GetMonitoreoByMascotaId(int mascotaId, [FromQuery] DateTime? date = null)
         {
-            var monitoreoDto = await _monitoreoService.GetAllMonitoreosByMascotaIdAsync(mascotaId);
+            var monitoreoDto = await _monitoreoService.GetAllMonitoreosByMascotaIdAsync(mascotaId, date);
 
             if (monitoreoDto == null)
                 return NotFound();

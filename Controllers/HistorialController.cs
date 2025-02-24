@@ -43,6 +43,13 @@ namespace PetPalzAPI.Controllers
             return Ok(historialesDto);
         }
 
+        [HttpGet("Mascota/{mascotaId}")]
+        public async Task<IActionResult> GetHistorialesMedicosByMascotaId(int mascotaId)
+        {
+            var historialesMedicos = await _historialService.GetHistorialesMedicosByMascotaIdAsync(mascotaId);
+            return Ok(historialesMedicos);
+        }
+
         [HttpPut("{id}")]
         public IActionResult ActualizarHistorial(int id, [FromBody] HistorialMedicoUpdateDTO historialDto)
         {

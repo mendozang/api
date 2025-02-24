@@ -43,6 +43,13 @@ namespace PetPalzAPI.Controllers
         return Ok(recordatoriosDto);
     }
 
+    [HttpGet("Mascota/{mascotaId}")]
+    public async Task<IActionResult> GetRecordatoriosByMascotaId(int mascotaId, [FromQuery] DateTime? startDate = null, [FromQuery] DateTime? endDate = null)
+    {
+        var recordatorios = await _recordatorioService.GetRecordatoriosByMascotaIdAsync(mascotaId, startDate, endDate);
+        return Ok(recordatorios);
+    }
+
         [HttpPut("{id}")]
         public IActionResult ActualizarRecordatorio(int id, [FromBody] RecordatorioUpdateDTO recordatorioDto)
         {

@@ -76,6 +76,22 @@ namespace PetPalzAPI.Services
         };
     }
 
+    public async Task<List<HistorialMedicoDto>> GetHistorialesMedicosByMascotaIdAsync(int mascotaId)
+{
+    return await _context.HistorialesMedicos
+        .Where(h => h.MascotaId == mascotaId)
+        .Include(h => h.Mascota)
+        .Select(h => new HistorialMedicoDto
+        {
+            Id = h.Id,
+            Vacunas = h.Vacunas,
+            Enfermedades = h.Enfermedades,
+            Tratamientos = h.Tratamientos,
+            MascotaId = h.MascotaId
+        })
+        .ToListAsync();
+}
+
         public bool ActualizarHistorial(int id, HistorialMedicoUpdateDTO historialDto)
         {
             var historial = _context.HistorialesMedicos.FirstOrDefault(h => h.Id == id);

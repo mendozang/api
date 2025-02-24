@@ -77,8 +77,28 @@ namespace PetPalzAPI.Services
                 .ToListAsync();
         }
 
-        public async Task<List<MonitoreoDto>> GetAllMonitoreosByMascotaIdAsync(int mascotaId)
+        public async Task<List<MonitoreoDto>> GetAllMonitoreosByMascotaIdAsync(int mascotaId, DateTime? date = null)
         {
+            if (date != null)
+            {
+                return await _context.Monitoreos
+                    .Where(m => m.MascotaId == mascotaId && m.FechaRegistro.Date == date.Value.Date)
+                    .Include(m => m.Mascota)
+                    .Select(m => new MonitoreoDto
+                    {
+                        Id = m.Id,
+                        Pulso = m.Pulso,
+                        Temperatura = m.Temperatura,
+                        Respiración = m.Respiración,
+                        VFC = m.VFC,
+                        Latitud = m.Latitud,
+                        Longitud = m.Longitud,
+                        FechaRegistro = m.FechaRegistro,
+                        MascotaId = m.MascotaId
+                    })
+                    .ToListAsync();
+            }
+
             return await _context.Monitoreos
                 .Where(m => m.MascotaId == mascotaId)
                 .Include(m => m.Mascota)

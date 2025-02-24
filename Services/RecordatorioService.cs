@@ -87,6 +87,41 @@ namespace PetPalzAPI.Services
                 .ToListAsync();
         }
 
+        public async Task<List<RecordatorioDto>> GetRecordatoriosByMascotaIdAsync(int mascotaId, DateTime? startDate = null, DateTime? endDate = null)
+{
+    var query = _context.Recordatorios.AsQueryable();
+
+    query = query.Where(r => r.MascotaId == mascotaId);
+
+    if (startDate.HasValue)
+    {
+        query = query.Where(r => r.FechaInicio >= startDate.Value || (r.FechaUnica.HasValue && r.FechaUnica.Value >= startDate.Value));
+    }
+
+    if (endDate.HasValue)
+    {
+        query = query.Where(r => r.FechaFin <= endDate.Value || (r.FechaUnica.HasValue && r.FechaUnica.Value <= endDate.Value));
+    }
+
+    return await query
+        .OrderBy(r => r.Id)
+        .Include(r => r.Mascota)
+        .Select(r => new RecordatorioDto
+        {
+            Id = r.Id,
+            Tipo = r.Tipo,
+            Nombre = r.Nombre,
+            Descripcion = r.Descripcion,
+            Hora = r.Hora,
+            Frecuencia = r.Frecuencia,
+            FechaInicio = r.FechaInicio,
+            FechaFin = r.FechaFin,
+            FechaUnica = r.FechaUnica,
+            MascotaId = r.MascotaId
+        })
+        .ToListAsync();
+}
+
 
         public bool ActualizarRecordatorio(int id, RecordatorioUpdateDTO recordatorioDto)
         {

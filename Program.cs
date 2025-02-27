@@ -12,6 +12,7 @@ DotNetEnv.Env.Load();
 
 //env
 var connectionString = $"Host={Environment.GetEnvironmentVariable("HOST_DB")};" +
+                       $"Port={Environment.GetEnvironmentVariable("PORT_DB")};" +
                        $"Database={Environment.GetEnvironmentVariable("NAME_DB")};" +
                        $"Username={Environment.GetEnvironmentVariable("USER_DB")};" +
                        $"Password={Environment.GetEnvironmentVariable("PASSWORD_DB")};" +

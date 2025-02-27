@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PetPalzAPI.Data;
@@ -11,13 +12,14 @@ using PetPalzAPI.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250226182135_connection")]
+    partial class connection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("public")
                 .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -47,7 +49,7 @@ namespace api.Migrations
 
                     b.HasIndex("MascotaId");
 
-                    b.ToTable("HistorialesMedicos", "public");
+                    b.ToTable("HistorialesMedicos");
                 });
 
             modelBuilder.Entity("PetPalzAPI.Models.Mascota", b =>
@@ -85,7 +87,7 @@ namespace api.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Mascotas", "public");
+                    b.ToTable("Mascotas");
                 });
 
             modelBuilder.Entity("PetPalzAPI.Models.Monitoreo", b =>
@@ -124,7 +126,7 @@ namespace api.Migrations
 
                     b.HasIndex("MascotaId");
 
-                    b.ToTable("Monitoreos", "public");
+                    b.ToTable("Monitoreos");
                 });
 
             modelBuilder.Entity("PetPalzAPI.Models.PrimerosAuxilios", b =>
@@ -157,7 +159,7 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PrimerosAuxilios", "public");
+                    b.ToTable("PrimerosAuxilios");
                 });
 
             modelBuilder.Entity("PetPalzAPI.Models.Recordatorio", b =>
@@ -200,7 +202,7 @@ namespace api.Migrations
 
                     b.HasIndex("MascotaId");
 
-                    b.ToTable("Recordatorios", "public");
+                    b.ToTable("Recordatorios");
                 });
 
             modelBuilder.Entity("PetPalzAPI.Models.Usuario", b =>
@@ -228,7 +230,7 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios", "public");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("PetPalzAPI.Models.Veterinario", b =>
@@ -251,7 +253,7 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Veterinarios", "public");
+                    b.ToTable("Veterinarios");
                 });
 
             modelBuilder.Entity("PetPalzAPI.Models.HistorialMedico", b =>

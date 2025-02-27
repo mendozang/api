@@ -4,32 +4,33 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DotNetEnv;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 DotNetEnv.Env.Load();
 
 //env
-var connectionString = $"Host={Environment.GetEnvironmentVariable("HOST_DB")};" +
-                       $"Port={Environment.GetEnvironmentVariable("PORT_DB")};" +
-                       $"Database={Environment.GetEnvironmentVariable("NAME_DB")};" +
-                       $"Username={Environment.GetEnvironmentVariable("USER_DB")};" +
-                       $"Password={Environment.GetEnvironmentVariable("PASSWORD_DB")};" +
-                       "SSL Mode=Require;Trust Server Certificate=true";
+var connectionString =
+                        $"Username={Environment.GetEnvironmentVariable("USER_DB")};" +
+                        $"Password={Environment.GetEnvironmentVariable("PASSWORD_DB")};" +
+                        $"Host={Environment.GetEnvironmentVariable("HOST_DB")};" +
+                        $"Port={Environment.GetEnvironmentVariable("PORT_DB")};" +
+                        $"Database={Environment.GetEnvironmentVariable("NAME_DB")};" +
+                        "SearchPath=public;SSL Mode=Require; Trust Server Certificate=true;";
+
+
+
+
 
 if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException("La cadena de conexión no se pudo construir. Verifica las variables de entorno.");
 }
 
-IWebHostBuilder webBuilder = new WebHostBuilder()
-   .UseUrls()
-   .UseKestrel()
-   .ConfigureKestrel(options =>
+// Configure Kestrel server options
+builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(5021); // HTTP port
-    options.ListenAnyIP(5001, listenOptions =>
+    options.ListenAnyIP(5000); // HTTP port
+    options.ListenAnyIP(5433, listenOptions =>
     {
         listenOptions.UseHttps(); // HTTPS port
     });
@@ -57,7 +58,6 @@ builder.Services.AddCors(options =>
                    .AllowAnyHeader();
         });
 });
-
 
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
@@ -87,11 +87,9 @@ app.UseRouting();
 
 app.UseCors("AllowAllOrigins");
 
-
 app.UseAuthorization();
 
 app.MapControllers();
 app.Run();
-
 
 

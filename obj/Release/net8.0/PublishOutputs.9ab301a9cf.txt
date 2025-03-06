@@ -1,4 +1,5 @@
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.exe
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\out\web.config
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\web.config
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\web.config
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\web.config
@@ -26,6 +27,10 @@ C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\api.d
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\api.runtimeconfig.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\appsettings.Development.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\appsettings.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\out\api.deps.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\out\api.runtimeconfig.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\out\appsettings.Development.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\out\appsettings.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.runtimeconfig.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.pdb

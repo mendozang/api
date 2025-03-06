@@ -3,6 +3,7 @@ using PetPalzAPI.Data;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DotNetEnv;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,13 +27,15 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("La cadena de conexión no se pudo construir. Verifica las variables de entorno.");
 }
 
+var certificate = new X509Certificate2("certificate.pfx", "petpalzcert");
+
 // Configure Kestrel server options
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(5000); // HTTP port
     options.ListenAnyIP(5433, listenOptions =>
     {
-        listenOptions.UseHttps(); // HTTPS port
+        listenOptions.UseHttps(certificate); // HTTPS port
     });
 });
 

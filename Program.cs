@@ -35,7 +35,7 @@ builder.WebHost.ConfigureKestrel(options =>
     options.ListenAnyIP(5000); // HTTP port
     options.ListenAnyIP(5433, listenOptions =>
     {
-        listenOptions.UseHttps(certificate); // HTTPS port
+        listenOptions.UseHttps("./certificate.pfx", "petpalzcert"); // HTTPS port
     });
 });
 

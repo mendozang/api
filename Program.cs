@@ -15,7 +15,7 @@ var connectionString =
                         $"Host={Environment.GetEnvironmentVariable("HOST_DB")};" +
                         $"Port={Environment.GetEnvironmentVariable("PORT_DB")};" +
                         $"Database={Environment.GetEnvironmentVariable("NAME_DB")};" +
-                        "SearchPath=public;SSL Mode=Require; Trust Server Certificate=true;";
+                        "SearchPath=public;SSL Mode=Require; Trust Server Certificate=true; Include Error Detail=True";
 
 
 

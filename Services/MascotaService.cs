@@ -40,8 +40,8 @@ namespace PetPalzAPI.Services
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                query = query.Where(m => (m.Nombre != null && m.Nombre.Contains(searchTerm)) || 
-                                           (m.Especie != null && m.Especie.Contains(searchTerm)) || 
+                query = query.Where(m => (m.Nombre != null && m.Nombre.Contains(searchTerm)) ||
+                                           (m.Especie != null && m.Especie.Contains(searchTerm)) ||
                                            (m.Raza != null && m.Raza.Contains(searchTerm)));
             }
 
@@ -64,24 +64,24 @@ namespace PetPalzAPI.Services
         }
 
         public async Task<MascotaDto> GetMascotaByIdAsync(int id)
-    {
-        var mascota = await _context.Mascotas
-            .FirstOrDefaultAsync(m => m.Id == id);
-
-        if (mascota == null) return null;
-
-        return new MascotaDto
         {
-            Id = mascota.Id,
-            Nombre = mascota.Nombre,
-            Especie = mascota.Especie,
-            Raza = mascota.Raza,
-            FechaNacimiento = mascota.FechaNacimiento,
-            Peso = mascota.Peso,
-            ImagenUrl = mascota.ImagenUrl,
-            UsuarioId = mascota.UsuarioId
-        };
-    }
+            var mascota = await _context.Mascotas
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (mascota == null) return null;
+
+            return new MascotaDto
+            {
+                Id = mascota.Id,
+                Nombre = mascota.Nombre,
+                Especie = mascota.Especie,
+                Raza = mascota.Raza,
+                FechaNacimiento = mascota.FechaNacimiento,
+                Peso = mascota.Peso,
+                ImagenUrl = mascota.ImagenUrl,
+                UsuarioId = mascota.UsuarioId
+            };
+        }
 
         public bool ActualizarMascota(int id, MascotaUpdateDTO mascotaDto)
         {

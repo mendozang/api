@@ -11,7 +11,6 @@ namespace PetPalzAPI.Models
         public string? ImagenUrl { get; set; }
         public int UsuarioId { get; set; }
         public required Usuario Usuario { get; set; }
-        public ICollection<HistorialMedico> HistorialesMedicos { get; set; } = new List<HistorialMedico>();
 
         public ICollection<Recordatorio>? Recordatorios { get; set; }
 

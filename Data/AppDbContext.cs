@@ -12,6 +12,9 @@ namespace PetPalzAPI.Data
         public DbSet<Mascota> Mascotas { get; set; }
         public DbSet<Monitoreo> Monitoreos { get; set; }
         public DbSet<HistorialMedico> HistorialesMedicos { get; set; }
+        public DbSet<Vacuna> Vacunas { get; set; }
+        public DbSet<Enfermedad> Enfermedades { get; set; }
+        public DbSet<Tratamiento> Tratamientos { get; set; }
         public DbSet<Recordatorio> Recordatorios { get; set; }
         public DbSet<Veterinario> Veterinarios { get; set; }
         public DbSet<PrimerosAuxilios> PrimerosAuxilios { get; set; }
@@ -21,6 +24,7 @@ namespace PetPalzAPI.Data
             modelBuilder.HasDefaultSchema("public");
             base.OnModelCreating(modelBuilder);
 
+            // Configuración de conversión de fechas a UTC
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 foreach (var property in entityType.GetProperties())
@@ -43,35 +47,57 @@ namespace PetPalzAPI.Data
                 }
             }
 
-            // Relación Usuario-Mascotas
+            // Relación Usuario-Mascotas (1:N)
             modelBuilder.Entity<Usuario>()
                 .HasMany(u => u.Mascotas)
                 .WithOne(m => m.Usuario)
                 .HasForeignKey(m => m.UsuarioId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Relación Mascota-Historial Médico
-            modelBuilder.Entity<Mascota>()
-                .HasMany(m => m.HistorialesMedicos)
-                .WithOne(h => h.Mascota)
-                .HasForeignKey(h => h.MascotaId)
+            // Relación Mascota-Historial Médico (1:1)
+            modelBuilder.Entity<HistorialMedico>()
+                .HasOne(h => h.Mascota)
+                .WithOne()
+                .HasForeignKey<HistorialMedico>(h => h.MascotaId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Relación Mascota-Recordatorio
+
+            // Relación Historial Médico - Vacunas (1:N)
+            modelBuilder.Entity<HistorialMedico>()
+                .HasMany(h => h.Vacunas)
+                .WithOne(v => v.HistorialMedico)
+                .HasForeignKey(v => v.HistorialMedicoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Relación Historial Médico - Enfermedades (1:N)
+            modelBuilder.Entity<HistorialMedico>()
+                .HasMany(h => h.Enfermedades)
+                .WithOne(e => e.HistorialMedico)
+                .HasForeignKey(e => e.HistorialMedicoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Relación Historial Médico - Tratamientos (1:N)
+            modelBuilder.Entity<HistorialMedico>()
+                .HasMany(h => h.Tratamientos)
+                .WithOne(t => t.HistorialMedico)
+                .HasForeignKey(t => t.HistorialMedicoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Relación Mascota-Recordatorio (1:N)
             modelBuilder.Entity<Mascota>()
                 .HasMany(m => m.Recordatorios)
                 .WithOne(r => r.Mascota)
                 .HasForeignKey(r => r.MascotaId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Relación Mascota-Monitoreo
+            // Relación Mascota-Monitoreo (1:N)
             modelBuilder.Entity<Mascota>()
                 .HasMany(m => m.Monitoreos)
                 .WithOne(mo => mo.Mascota)
                 .HasForeignKey(mo => mo.MascotaId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Configuración de Veterinario: Sin relaciones
+            // Configuración de Veterinario: Sin relaciones directas
             modelBuilder.Entity<Veterinario>();
 
             // Configuración de PrimerosAuxilios: Tabla independiente

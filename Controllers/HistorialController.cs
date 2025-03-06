@@ -1,74 +1,165 @@
 using Microsoft.AspNetCore.Mvc;
-using PetPalzAPI.DTOs;
 using PetPalzAPI.Services;
+using PetPalzAPI.DTOs;
+using System.Threading.Tasks;
 
 namespace PetPalzAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/historial-medico")]
     public class HistorialMedicoController : ControllerBase
     {
-        private readonly HistorialMedicoService _historialService;
+        private readonly HistorialMedicoService _historialMedicoService;
 
-        public HistorialMedicoController(HistorialMedicoService historialService)
+        public HistorialMedicoController(HistorialMedicoService historialMedicoService)
         {
-            _historialService = historialService;
+            _historialMedicoService = historialMedicoService;
         }
 
         [HttpPost]
-        public IActionResult CrearHistorial([FromBody] HistorialMedicoCreateDTO historialDto)
+        public async Task<IActionResult> CrearHistorial([FromBody] HistorialMedicoCreateDTO historialDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var historial = _historialService.CrearHistorial(historialDto);
-            return CreatedAtAction(nameof(GetHistorialMedico), new { id = historial.Id }, historial);
+            var historial = await _historialMedicoService.CrearHistorialAsync(historialDto);
+            return CreatedAtAction(nameof(GetHistorialPorId), new { id = historial.Id }, historial);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetHistorialMedico(int id)
+        public async Task<IActionResult> GetHistorialPorId(int id)
         {
-            var historialDto = await _historialService.GetHistorialMedicoByIdAsync(id);
+            var historial = await _historialMedicoService.GetHistorialMedicoByIdAsync(id);
+            if (historial == null) return NotFound();
 
-            if (historialDto == null)
-                return NotFound();
-
-            return Ok(historialDto);
+            return Ok(historial);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllHistorialesMedicos(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
+        [HttpGet("mascota/{mascotaId}")]
+        public async Task<IActionResult> GetHistorialPorMascotaId(int mascotaId)
         {
-            var historialesDto = await _historialService.GetAllHistorialesMedicosAsync(pageNumber, pageSize, searchTerm ?? string.Empty);
-            return Ok(historialesDto);
+            var historial = await _historialMedicoService.GetHistorialByMascotaIdAsync(mascotaId);
+            if (historial == null) return NotFound();
+
+            return Ok(historial);
         }
 
-        [HttpGet("Mascota/{mascotaId}")]
-        public async Task<IActionResult> GetHistorialesMedicosByMascotaId(int mascotaId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> EliminarHistorial(int id)
         {
-            var historialesMedicos = await _historialService.GetHistorialesMedicosByMascotaIdAsync(mascotaId);
-            return Ok(historialesMedicos);
+            var eliminado = await _historialMedicoService.EliminarHistorialAsync(id);
+            if (!eliminado) return NotFound();
+
+            return NoContent();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult ActualizarHistorial(int id, [FromBody] HistorialMedicoUpdateDTO historialDto)
+        // Endpoints para manejar vacunas
+        [HttpPost("{id}/vacunas")]
+        public async Task<IActionResult> AgregarVacuna(int id, [FromBody] VacunaCreateDTO vacunaDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            vacunaDto.HistorialMedicoId = id;
+            var agregado = await _historialMedicoService.AgregarVacunaAsync(vacunaDto);
+            if (!agregado) return NotFound();
 
-            var actualizado = _historialService.ActualizarHistorial(id, historialDto);
+            return Ok();
+        }
+
+        [HttpGet("vacunas/{historialId}")]
+        public async Task<IActionResult> GetVacunas(int historialId)
+        {
+            var vacunas = await _historialMedicoService.GetVacunasByHistorialIdAsync(historialId);
+            return Ok(vacunas);
+        }
+
+        [HttpPut("vacunas/{id}")]
+        public async Task<IActionResult> ActualizarVacuna(int id, [FromBody] VacunaCreateDTO vacunaDto)
+        {
+            vacunaDto.HistorialMedicoId = id;
+            var actualizado = await _historialMedicoService.ActualizarVacunaAsync(id, vacunaDto);
             if (!actualizado) return NotFound();
 
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult EliminarHistorial(int id)
+        [HttpDelete("vacunas/{id}")]
+        public async Task<IActionResult> EliminarVacuna(int id)
         {
-            var eliminado = _historialService.EliminarHistorial(id);
+            var eliminado = await _historialMedicoService.EliminarVacunaAsync(id);
+            if (!eliminado) return NotFound();
+
+            return NoContent();
+        }
+
+        // Endpoints para manejar enfermedades
+        [HttpPost("{id}/enfermedades")]
+        public async Task<IActionResult> AgregarEnfermedad(int id, [FromBody] EnfermedadCreateDTO enfermedadDto)
+        {
+            enfermedadDto.HistorialMedicoId = id;
+            var agregado = await _historialMedicoService.AgregarEnfermedadAsync(enfermedadDto);
+            if (!agregado) return NotFound();
+
+            return Ok();
+        }
+
+        [HttpGet("enfermedades/{historialId}")]
+        public async Task<IActionResult> GetEnfermedades(int historialId)
+        {
+            var enfermedades = await _historialMedicoService.GetEnfermedadesByHistorialIdAsync(historialId);
+            return Ok(enfermedades);
+        }
+
+        [HttpPut("enfermedades/{id}")]
+        public async Task<IActionResult> ActualizarEnfermedad(int id, [FromBody] EnfermedadCreateDTO enfermedadDto)
+        {
+            enfermedadDto.HistorialMedicoId = id;
+            var actualizado = await _historialMedicoService.ActualizarEnfermedadAsync(id, enfermedadDto);
+            if (!actualizado) return NotFound();
+
+            return NoContent();
+        }
+
+        [HttpDelete("enfermedades/{id}")]
+        public async Task<IActionResult> EliminarEnfermedad(int id)
+        {
+            var eliminado = await _historialMedicoService.EliminarEnfermedadAsync(id);
+            if (!eliminado) return NotFound();
+
+            return NoContent();
+        }
+
+        // Endpoints para manejar tratamientos
+        [HttpPost("{id}/tratamientos")]
+        public async Task<IActionResult> AgregarTratamiento(int id, [FromBody] TratamientoCreateDTO tratamientoDto)
+        {
+            tratamientoDto.HistorialMedicoId = id;
+            var agregado = await _historialMedicoService.AgregarTratamientoAsync(tratamientoDto);
+            if (!agregado) return NotFound();
+
+            return Ok();
+        }
+
+        [HttpGet("tratamientos/{historialId}")]
+        public async Task<IActionResult> GetTratamientos(int historialId)
+        {
+            var tratamientos = await _historialMedicoService.GetTratamientosByHistorialIdAsync(historialId);
+            return Ok(tratamientos);
+        }
+
+        [HttpPut("tratamientos/{id}")]
+        public async Task<IActionResult> ActualizarTratamiento(int id, [FromBody] TratamientoCreateDTO tratamientoDto)
+        {
+            tratamientoDto.HistorialMedicoId = id;
+            var actualizado = await _historialMedicoService.ActualizarTratamientoAsync(id, tratamientoDto);
+            if (!actualizado) return NotFound();
+
+            return NoContent();
+        }
+
+        [HttpDelete("tratamientos/{id}")]
+        public async Task<IActionResult> EliminarTratamiento(int id)
+        {
+            var eliminado = await _historialMedicoService.EliminarTratamientoAsync(id);
             if (!eliminado) return NotFound();
 
             return NoContent();
         }
     }
 }
+

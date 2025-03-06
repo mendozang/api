@@ -9,7 +9,7 @@ public class MonitoreoCreateDto {
         public required double Temperatura { get; set; }
 
         [Required]
-        public required int Respiración { get; set; } 
+        public required int Respiracion { get; set; } 
 
         [Required]
         public required int VFC { get; set; } 

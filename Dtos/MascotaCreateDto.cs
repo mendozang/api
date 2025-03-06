@@ -23,5 +23,6 @@ namespace PetPalzAPI.DTOs
 
         [Required]
         public int UsuarioId { get; set; } // Relación con el usuario
+
     }
 }

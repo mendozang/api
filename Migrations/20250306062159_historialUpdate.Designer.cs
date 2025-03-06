@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PetPalzAPI.Data;
@@ -11,9 +12,11 @@ using PetPalzAPI.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250306062159_historialUpdate")]
+    partial class historialUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,6 +87,9 @@ namespace api.Migrations
 
                     b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("HistorialMedicoId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ImagenUrl")
                         .HasColumnType("text");
@@ -347,7 +353,7 @@ namespace api.Migrations
             modelBuilder.Entity("PetPalzAPI.Models.HistorialMedico", b =>
                 {
                     b.HasOne("PetPalzAPI.Models.Mascota", "Mascota")
-                        .WithOne()
+                        .WithOne("HistorialMedico")
                         .HasForeignKey("PetPalzAPI.Models.HistorialMedico", "MascotaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -421,6 +427,9 @@ namespace api.Migrations
 
             modelBuilder.Entity("PetPalzAPI.Models.Mascota", b =>
                 {
+                    b.Navigation("HistorialMedico")
+                        .IsRequired();
+
                     b.Navigation("Monitoreos");
 
                     b.Navigation("Recordatorios");

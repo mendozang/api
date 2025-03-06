@@ -6,16 +6,14 @@ namespace PetPalzAPI.Models
     {
         public int Id { get; set; }
 
-        public string? Vacunas { get; set; } // Ejemplo: "Rabia, Parvovirus"
-
-        public string? Enfermedades { get; set; } // Ejemplo: "Dermatitis, Gripe"
-
-        public string? Tratamientos { get; set; } // Ejemplo: "Antibióticos, Baños medicados"
-
         [Required]
         public int MascotaId { get; set; }
 
         [Required]
         public required Mascota Mascota { get; set; } // Relación con la mascota
+
+        public List<Vacuna> Vacunas { get; set; } = new List<Vacuna>();
+        public List<Tratamiento> Tratamientos { get; set; } = new List<Tratamiento>();
+        public List<Enfermedad> Enfermedades { get; set; } = new List<Enfermedad>();
     }
 }

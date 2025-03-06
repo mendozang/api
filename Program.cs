@@ -27,7 +27,7 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("La cadena de conexión no se pudo construir. Verifica las variables de entorno.");
 }
 
-var certificate = new X509Certificate2("certificate.pfx", "petpalzcert");
+var certificate = new X509Certificate2("./certificate.pfx", "petpalzcert");
 
 // Configure Kestrel server options
 builder.WebHost.ConfigureKestrel(options =>

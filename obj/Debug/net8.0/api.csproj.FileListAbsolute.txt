@@ -156,3 +156,8 @@ C:\Users\Angelica\Documents\Escuela\appPetPalz\api\obj\Debug\net8.0\refint\api.d
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\obj\Debug\net8.0\api.pdb
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\obj\Debug\net8.0\api.genruntimeconfig.cache
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\obj\Debug\net8.0\ref\api.dll
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Debug\net8.0\out\out\out\out\out\web.config
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Debug\net8.0\out\out\out\out\out\api.deps.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Debug\net8.0\out\out\out\out\out\api.runtimeconfig.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Debug\net8.0\out\out\out\out\out\appsettings.Development.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Debug\net8.0\out\out\out\out\out\appsettings.json

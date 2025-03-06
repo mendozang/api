@@ -149,3 +149,15 @@ C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\ou
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\api.runtimeconfig.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\appsettings.Development.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\appsettings.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\web.config
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\api.deps.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\api.runtimeconfig.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\appsettings.Development.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\appsettings.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\DotNetEnv.dll
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\Sprache.dll
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\out\web.config
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\out\api.deps.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\out\api.runtimeconfig.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\out\appsettings.Development.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\bin\Release\net8.0\out\out\out\out\out\appsettings.json

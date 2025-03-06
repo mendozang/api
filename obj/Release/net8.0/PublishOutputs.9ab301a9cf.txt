@@ -1,4 +1,6 @@
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.exe
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\web.config
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\web.config
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\web.config
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\web.config
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\web.config
@@ -16,9 +18,18 @@ C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\api.deps.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\api.runtimeconfig.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\appsettings.Development.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\appsettings.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\api.deps.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\api.runtimeconfig.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\appsettings.Development.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\appsettings.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\api.deps.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\api.runtimeconfig.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\appsettings.Development.json
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\out\out\out\out\out\appsettings.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.runtimeconfig.json
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.pdb
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\DotNetEnv.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Microsoft.EntityFrameworkCore.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -35,8 +46,11 @@ C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Microsoft.Extensions.Prim
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Microsoft.OpenApi.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Npgsql.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Sprache.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\System.Text.Encodings.Web.dll
+C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\Angelica\Documents\Escuela\appPetPalz\api\out\api.deps.json

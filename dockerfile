@@ -9,6 +9,7 @@ COPY . ./
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
+
 # Usa la imagen de .NET Runtime para ejecutar la aplicación
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app

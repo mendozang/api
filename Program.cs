@@ -25,20 +25,7 @@ if (string.IsNullOrEmpty(connectionString))
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(5000); // HTTP port
-    options.ListenAnyIP(5001, listenOptions =>
-{
-    var certPath = Environment.GetEnvironmentVariable("CERT_PATH");
-    var certPassword = Environment.GetEnvironmentVariable("CERT_PASSWORD");
-
-    if (!string.IsNullOrEmpty(certPath) && !string.IsNullOrEmpty(certPassword))
-    {
-        listenOptions.UseHttps(certPath, certPassword);
-    }
-    else
-    {
-        throw new InvalidOperationException("No HTTPS certificate was specified. Set CERT_PATH and CERT_PASSWORD environment variables.");
-    }
-});
+    
 
 });
 
@@ -87,7 +74,6 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
 
 app.UseRouting();
 

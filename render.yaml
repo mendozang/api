@@ -2,7 +2,7 @@ services:
   api:
     build: .
     ports:
-      - "5001:5001"
+      - "5433:5433"
     environment:
       - DB_HOST=database
     networks:

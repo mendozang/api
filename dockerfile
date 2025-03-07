@@ -18,7 +18,7 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Expone el puerto 5001 para la aplicación
-EXPOSE 5001
+EXPOSE 5433
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Configura el comando de inicio de la aplicación

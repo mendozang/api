@@ -10,17 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
 
 //env
-var connectionString =
-                        $"Username={Environment.GetEnvironmentVariable("USER_DB")};" +
-                        $"Password={Environment.GetEnvironmentVariable("PASSWORD_DB")};" +
-                        $"Host={Environment.GetEnvironmentVariable("HOST_DB")};" +
-                        $"Port={Environment.GetEnvironmentVariable("PORT_DB")};" +
-                        $"Database={Environment.GetEnvironmentVariable("NAME_DB")};" +
-                        "SearchPath=public;SSL Mode=Require; Trust Server Certificate=true";
-
-
-
-
+var connectionString = $"Host={Environment.GetEnvironmentVariable("HOST_DB")};" +
+                       $"Database={Environment.GetEnvironmentVariable("NAME_DB")};" +
+                       $"Username={Environment.GetEnvironmentVariable("USER_DB")};" +
+                       $"Password={Environment.GetEnvironmentVariable("PASSWORD_DB")};" +
+                       "SSL Mode=Require;Trust Server Certificate=true";
 
 if (string.IsNullOrEmpty(connectionString))
 {
@@ -28,13 +22,12 @@ if (string.IsNullOrEmpty(connectionString))
 }
 
 
-// Configure Kestrel server options
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(5000); // HTTP port
-    options.ListenAnyIP(5433, listenOptions =>
+    options.ListenAnyIP(5001, listenOptions =>
     {
-        listenOptions.UseHttps(); // HTTPS port
+        listenOptions.UseHttps(); // HTTPS port with specified certificate
     });
 });
 
@@ -93,5 +86,3 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.Run();
-
-

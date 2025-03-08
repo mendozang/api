@@ -62,11 +62,11 @@ namespace PetPalzAPI.Services
                         Id = m.Id,
                         Nombre = m.Nombre,
                         Especie = m.Especie,
-                        AñoNacimiento = m.AñoNacimiento,
+                        AnoNacimiento = m.AnoNacimiento,
                         Peso = m.Peso,
                         Color = m.Color,
                         Genero = m.Genero,
-                        Tamaño = m.Tamaño,
+                        Tamano = m.Tamano,
                         Raza = m.Raza,
                         ImagenUrl = m.ImagenUrl,
                         UsuarioId = m.UsuarioId
@@ -94,12 +94,12 @@ namespace PetPalzAPI.Services
                     Id = m.Id,
                     Nombre = m.Nombre,
                     Especie = m.Especie,
-                    AñoNacimiento = m.AñoNacimiento,
+                    AnoNacimiento = m.AnoNacimiento,
                     Raza = m.Raza,
                     Color = m.Color,
                     Genero = m.Genero,
                     Peso = m.Peso,
-                    Tamaño = m.Tamaño,
+                    Tamano = m.Tamano,
                     ImagenUrl = m.ImagenUrl
                 }).ToList()
             };

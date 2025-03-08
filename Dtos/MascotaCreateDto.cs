@@ -8,7 +8,7 @@ namespace PetPalzAPI.DTOs
         [StringLength(20, MinimumLength = 2)]
         public required string Nombre { get; set; }
 
-        public string? AñoNacimiento { get; set; }
+        public string? AnoNacimiento { get; set; }
 
         [Required]
         public required string Especie { get; set; }
@@ -18,7 +18,7 @@ namespace PetPalzAPI.DTOs
         public string? Genero { get; set; }
 
         public double Peso { get; set; }
-        public string? Tamaño { get; set; }
+        public string? Tamano { get; set; }
         public string? ImagenUrl { get; set; }
 
 

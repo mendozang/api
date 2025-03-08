@@ -21,8 +21,11 @@ namespace PetPalzAPI.Services
                 Nombre = mascotaDto.Nombre,
                 Especie = mascotaDto.Especie,
                 Raza = mascotaDto.Raza,
-                FechaNacimiento = mascotaDto.FechaNacimiento,
+                AñoNacimiento = mascotaDto.AñoNacimiento,
+                Color = mascotaDto.Color,
+                Genero = mascotaDto.Genero,
                 Peso = mascotaDto.Peso,
+                Tamaño = mascotaDto.Tamaño,
                 ImagenUrl = mascotaDto.ImagenUrl,
                 UsuarioId = mascotaDto.UsuarioId,
                 Usuario = _context.Usuarios?.FirstOrDefault(u => u.Id == mascotaDto.UsuarioId) ?? throw new InvalidOperationException("Usuario not found")
@@ -55,8 +58,11 @@ namespace PetPalzAPI.Services
                     Nombre = m.Nombre,
                     Especie = m.Especie,
                     Raza = m.Raza,
-                    FechaNacimiento = m.FechaNacimiento,
+                    AñoNacimiento = m.AñoNacimiento,
+                    Color = m.Color,
+                    Genero = m.Genero,
                     Peso = m.Peso,
+                    Tamaño = m.Tamaño,
                     ImagenUrl = m.ImagenUrl,
                     UsuarioId = m.UsuarioId
                 })
@@ -76,8 +82,11 @@ namespace PetPalzAPI.Services
                 Nombre = mascota.Nombre,
                 Especie = mascota.Especie,
                 Raza = mascota.Raza,
-                FechaNacimiento = mascota.FechaNacimiento,
+                AñoNacimiento = mascota.AñoNacimiento,
+                Color = mascota.Color,
+                Genero = mascota.Genero,
                 Peso = mascota.Peso,
+                Tamaño = mascota.Tamaño,
                 ImagenUrl = mascota.ImagenUrl,
                 UsuarioId = mascota.UsuarioId
             };
@@ -91,17 +100,26 @@ namespace PetPalzAPI.Services
             if (!string.IsNullOrEmpty(mascotaDto.Nombre))
                 mascota.Nombre = mascotaDto.Nombre;
 
+            if (!string.IsNullOrEmpty(mascotaDto.AñoNacimiento))
+                mascota.AñoNacimiento = mascotaDto.AñoNacimiento;
+
             if (!string.IsNullOrEmpty(mascotaDto.Especie))
                 mascota.Especie = mascotaDto.Especie;
 
             if (!string.IsNullOrEmpty(mascotaDto.Raza))
                 mascota.Raza = mascotaDto.Raza;
 
-            if (mascotaDto.FechaNacimiento != default(DateTime))
-                mascota.FechaNacimiento = mascotaDto.FechaNacimiento;
+            if (!string.IsNullOrEmpty(mascotaDto.Color))
+                mascota.Color = mascotaDto.Color;
+
+            if (!string.IsNullOrEmpty(mascotaDto.Genero))
+                mascota.Genero = mascotaDto.Genero;
 
             if (mascotaDto.Peso != default(double))
                 mascota.Peso = mascotaDto.Peso;
+
+            if (!string.IsNullOrEmpty(mascotaDto.Tamaño))
+                mascota.Tamaño = mascotaDto.Tamaño;
 
             if (!string.IsNullOrEmpty(mascotaDto.ImagenUrl))
                 mascota.ImagenUrl = mascotaDto.ImagenUrl;

@@ -44,6 +44,17 @@ namespace PetPalzAPI.Controllers
             return Ok(primerosAuxiliosDto);
         }
 
+        [HttpGet("categoria/{categoria}")]
+        public async Task<IActionResult> GetPrimerosAuxiliosByCategoria(string categoria)
+        {
+            var primerosAuxiliosDto = await _primerosAuxiliosService.GetPrimerosAuxiliosByCategoriaAsync(categoria);
+
+            if (primerosAuxiliosDto == null)
+                return NotFound();
+
+            return Ok(primerosAuxiliosDto);
+        }
+
         [HttpPut("{id}")]
         public IActionResult ActualizarPrimerosAuxilios(int id, [FromBody] PrimerosAuxiliosCreateDto primerosAuxiliosDto)
         {

@@ -62,6 +62,28 @@ namespace PetPalzAPI.Services
                 .ToListAsync();
         }
 
+        public async Task<PrimerosAuxiliosDto> GetPrimerosAuxiliosByCategoriaAsync(string categoria)
+        {
+            var primerosAuxilios = await _context.PrimerosAuxilios
+                .Where(p => p.Categoria == categoria)
+                .Select(p => new PrimerosAuxiliosDto
+                {
+                    Id = p.Id,
+                    Titulo = p.Titulo,
+                    Categoria = p.Categoria,
+                    Resumen = p.Resumen,
+                    ImagenUrl = p.ImagenUrl,
+                    Contenido = p.Contenido
+                }).FirstOrDefaultAsync();
+
+            if (primerosAuxilios == null)
+            {
+                throw new KeyNotFoundException($"PrimerosAuxilios with Categoria {categoria} not found.");
+            }
+
+            return primerosAuxilios;
+        }
+
         public async Task<PrimerosAuxiliosDto> GetPrimerosAuxiliosByIdAsync(int id)
         {
             var primerosAuxilios = await _context.PrimerosAuxilios

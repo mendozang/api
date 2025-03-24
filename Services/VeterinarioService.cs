@@ -19,8 +19,15 @@ namespace PetPalzAPI.Services
             var veterinario = new Veterinario
             {
                 Nombre = dto.Nombre,
+                Descripcion = dto.Descripcion,
                 Direccion = dto.Direccion,
-                InformacionContacto = dto.InformacionContacto,
+                Horario = dto.Horario,
+                Telefono = dto.Telefono,
+                Email = dto.Email,
+                Latitud = dto.Latitud,
+                Longitud = dto.Longitud,
+                Calificacion = dto.Calificacion
+                
             };
 
             _context.Veterinarios.Add(veterinario);
@@ -43,8 +50,14 @@ namespace PetPalzAPI.Services
             {
                 Id = veterinario.Id,
                 Nombre = veterinario.Nombre,
+                Descripcion = veterinario.Descripcion,
                 Direccion = veterinario.Direccion,
-                InformacionContacto = veterinario.InformacionContacto
+                Horario = veterinario.Horario,
+                Telefono = veterinario.Telefono,
+                Email = veterinario.Email,
+                Latitud = veterinario.Latitud,
+                Longitud = veterinario.Longitud,
+                Calificacion = veterinario.Calificacion
             };
         }
 
@@ -54,9 +67,7 @@ namespace PetPalzAPI.Services
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                query = query.Where(v => (v.Nombre != null && v.Nombre.Contains(searchTerm)) ||
-                                         (v.Direccion != null && v.Direccion.Contains(searchTerm)) ||
-                                         (v.InformacionContacto != null && v.InformacionContacto.Contains(searchTerm)));
+                query = query.Where(v => v.Nombre != null && v.Nombre.Contains(searchTerm));
             }
 
             return await query
@@ -67,8 +78,14 @@ namespace PetPalzAPI.Services
                 {
                     Id = v.Id,
                     Nombre = v.Nombre,
+                    Descripcion = v.Descripcion,
                     Direccion = v.Direccion,
-                    InformacionContacto = v.InformacionContacto
+                    Horario = v.Horario,
+                    Telefono = v.Telefono,
+                    Email = v.Email,
+                    Latitud = v.Latitud,
+                    Longitud = v.Longitud,
+                    Calificacion = v.Calificacion
                 }).ToListAsync();
         }
 
@@ -83,8 +100,26 @@ namespace PetPalzAPI.Services
             if (!string.IsNullOrEmpty(dto.Direccion))
                 veterinario.Direccion = dto.Direccion;
 
-            if (!string.IsNullOrEmpty(dto.InformacionContacto))
-                veterinario.InformacionContacto = dto.InformacionContacto;
+            if (!string.IsNullOrEmpty(dto.Descripcion))
+                veterinario.Descripcion = dto.Descripcion;
+
+            if (!string.IsNullOrEmpty(dto.Horario))
+                veterinario.Horario = dto.Horario;
+
+            if (!string.IsNullOrEmpty(dto.Telefono))
+                veterinario.Telefono = dto.Telefono;
+
+            if (!string.IsNullOrEmpty(dto.Email))
+                veterinario.Email = dto.Email;
+
+            if (dto.Latitud != 0)
+                veterinario.Latitud = dto.Latitud;
+
+            if (dto.Longitud != 0)
+                veterinario.Longitud = dto.Longitud;
+
+            if (dto.Calificacion != 0)
+                veterinario.Calificacion = dto.Calificacion;
 
             _context.SaveChanges();
             return true;
